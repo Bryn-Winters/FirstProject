@@ -63,6 +63,21 @@ function changeUI() : void {
     //Remove offset at the top
     pagecontainer.style.marginTop = "20px";
 }
+$.ajax({
+  url: "/api/getWeather",
+  data: {
+    zipcode: 97201
+  },
+  success: function( result ) {
+    $( "#weather-temp" ).html( "<strong>" + result + "</strong> degrees" );
+  }
+});
+
+var hiddenBox = $( "#banner-message" );
+$( "#button-container button" ).on( "click", function( event ) {
+  hiddenBox.show();
+});
+
 
 // Refer to http://stackoverflow.com/questions/35565732/implementing-microsofts-project-oxford-emotion-api-and-file-upload
 // and code snippet in emotion API documentation
