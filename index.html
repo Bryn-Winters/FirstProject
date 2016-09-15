@@ -25,6 +25,34 @@
                     Upload a picture of you
                 </label>
                 <button type="button" class="btn btn-info" id="refreshbtn">Another song please</button>
+
+
+                    <a href="http://jquery.com/">jQuery</a>
+                    <script src="./node_modules/jquery/dist/jquery.js"></script>
+                    <script>
+$( document ).ready(function() {
+ 
+    $( "a" ).click(function( event ) {
+ 
+        alert( "As you can see, the link no longer took you to jquery.com" );
+ 
+        event.preventDefault();
+ 
+    });
+ 
+});
+$( "a" ).click(function( event ) {
+ 
+    event.preventDefault();
+ 
+    $( this ).hide( "slow" );
+ 
+});
+
+                </script>
+
+
+
             </div>
             <div id="musicplayer"></div>
         </div>

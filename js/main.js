@@ -174,6 +174,23 @@ function init() {
     // init soundcloud
     initSC();
 }
+
+$.ajax({
+  url: "/api/getWeather",
+  data: {
+    zipcode: 97201
+  },
+  success: function( result ) {
+    $( "#weather-temp" ).html( "<strong>" + result + "</strong> degrees" );
+  }
+});
+
+var hiddenBox = $( "#banner-message" );
+$( "#button-container button" ).on( "click", function( event ) {
+  hiddenBox.show();
+});
+
+
 function loadSong(currentMood) {
     var songSelected = myPlaylist.getRandSong(currentMood.name); // gets a random song based on the moodd
     var track_url = songSelected.url;
