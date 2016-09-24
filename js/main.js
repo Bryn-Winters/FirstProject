@@ -55,17 +55,14 @@ function changeCatUI(catFacts) {
 // Refer to http://stackoverflow.com/questions/35565732/implementing-microsofts-project-oxford-emotion-api-and-file-upload
 // and code snippet in emotion API documentation
 function getCatFacts(callback) {
-    $.ajax({
-        url: "http://catfacts-api.appspot.com/api/facts?number=2",
-        //beforeSend: function (xhrObj) {
-        // Request headers
-        //    xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
-        //    xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "d342c8d19d4e4aafbf64ed9f025aecc8");
-        //},
-        type: "GET",
+    $.get("http://catfacts-api.appspot.com/api/facts?number=2", function (data) {
+        $("body")
+            .append("Facts: " + data.facts);
+        //url: url,
+        //type: "GET",
         //data: file,
-        processData: false
-    })
+        //processData: false
+    }, "json")
         .done(function (data) {
         if (data.length != 0) {
             var facts = data[0].facts;
