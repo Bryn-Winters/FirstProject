@@ -55,27 +55,43 @@ function changeCatUI(catFacts) {
 // Refer to http://stackoverflow.com/questions/35565732/implementing-microsofts-project-oxford-emotion-api-and-file-upload
 // and code snippet in emotion API documentation
 function getCatFacts(callback) {
-    $.get("http://catfacts-api.appspot.com/api/facts?number=2", function (data) {
-        $("body")
-            .append("Facts: " + data.facts);
+    /*$.get(
+         "http://catfacts-api.appspot.com/api/facts?number=2",
+        function(data)
+        {
+            $("body")
+            .append("Facts: " + data.facts );
         //url: url,
         //type: "GET",
         //data: file,
         //processData: false
-    }, "json")
-        .done(function (data) {
-        if (data.length != 0) {
+    }, "json")*/
+    $.ajax({
+        "url": "http://catfacts-api.appspot.com/api/facts&number=2",
+        //url: url,
+        //number: 2,
+        dataType: "json",
+        type: "GET",
+        //data: file,
+        success: function (result) {
+            if (result.length != 0) {
+                var facts = result[0].facts;
+                callback(facts);
+            }
+        }
+    });
+    /*.done(function (data) {
+        if (data.length != 0) { // facts are found
             var facts = data[0].facts;
             callback(facts);
-        }
-        else {
+        } else {
             pageheader.innerHTML = "We're having trouble finding your facts!";
         }
     })
-        .fail(function (error) {
+    .fail(function (error) {
         pageheader.innerHTML = "Sorry, something went wrong. :( Try again in a bit?";
         console.log(error.getAllResponseHeaders());
-    });
+    });*/
 }
 // Section of code that handles the mood
 //A Mood class which has the mood as a string and its corresponding emoji

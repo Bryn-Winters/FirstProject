@@ -72,7 +72,7 @@ function changeCatUI(catFacts : any) : void {
 // Refer to http://stackoverflow.com/questions/35565732/implementing-microsofts-project-oxford-emotion-api-and-file-upload
 // and code snippet in emotion API documentation
 function getCatFacts( callback) : void {
-    $.get(
+    /*$.get(
          "http://catfacts-api.appspot.com/api/facts?number=2",
         function(data)
         {
@@ -82,16 +82,24 @@ function getCatFacts( callback) : void {
         //type: "GET",
         //data: file,
         //processData: false
-    }, "json")
+    }, "json")*/
     
-    /*$.ajax({
-        url: "http://catfacts-api.appspot.com/api/facts?number=2",
+    $.ajax({
+        "url": "http://catfacts-api.appspot.com/api/facts&number=2",
         //url: url,
-        type: "GET",
+        //number: 2,
+        dataType : "json",
+        type : "GET",
         //data: file,
-        processData: false
-    })*/
-        .done(function (data) {
+        success: function(result){
+            if (result.length != 0) { // facts are found
+                var facts = result[0].facts;
+                callback(facts);
+            }
+
+        }
+    })
+        /*.done(function (data) {
             if (data.length != 0) { // facts are found
                 var facts = data[0].facts;
                 callback(facts);
@@ -102,7 +110,7 @@ function getCatFacts( callback) : void {
         .fail(function (error) {
             pageheader.innerHTML = "Sorry, something went wrong. :( Try again in a bit?";
             console.log(error.getAllResponseHeaders());
-        });
+        });*/
 }
 
 // Section of code that handles the mood
