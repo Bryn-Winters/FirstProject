@@ -10,13 +10,26 @@ factSelector.addEventListener("change", function () {
     pageheader.innerHTML = "Loading Cat facts...";
     //processImage(function (file) { //this checks the extension and file
     // Get emotions based on image
-    getCatFacts(function (catFacts) {
-        // Find out most dominant emotion
-        //currentMood = getCurrMood(emotionScores); //this is where we send out scores to find out the predominant emotion
-        changeCatUI(catFacts); //time to update the web app, with their emotion!
-        //loadSong(currentMood); // Load random song based on mood
-        //Done!!
+    //getCatFacts(function (catFacts) { //here we send the API request and get the response
+    var infacts;
+    $.get("http://catfacts-api.appspot.com/api/facts&number=2", 
+    //url: url,
+    //number: 2,
+    //dataType : "json",
+    //type : "GET",
+    //data: file,
+    function (facts, success) {
+        //if (result.length != 0) { // facts are found
+        infacts = facts.all;
+        //callback(infacts);
+        //}
     });
+    // Find out most dominant emotion
+    //currentMood = getCurrMood(emotionScores); //this is where we send out scores to find out the predominant emotion
+    changeCatUI(infacts); //time to update the web app, with their emotion!
+    //loadSong(currentMood); // Load random song based on mood
+    //Done!!
+    //});
     //});
 });
 refreshbtn.addEventListener("click", function () {
@@ -74,7 +87,7 @@ function getCatFacts(callback) {
     //data: file,
     function (facts, success) {
         //if (result.length != 0) { // facts are found
-        var infacts = facts;
+        var infacts = facts.all;
         callback(infacts);
         //}
     });
