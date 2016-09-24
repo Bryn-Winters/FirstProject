@@ -12,18 +12,21 @@ var refreshbtn = $("#refreshbtn")[0]; //You dont have to use [0], however this j
 
 // Register button listeners
 imgSelector.addEventListener("change", function () { // file has been picked
-    pageheader.innerHTML = "Just a sec while we analyse your mood...";
-    processImage(function (file) { //this checks the extension and file
+    pageheader.innerHTML = "Loading Cat facts...";
+    //processImage(function (file) { //this checks the extension and file
         // Get emotions based on image
-        sendEmotionRequest(file, function (emotionScores) { //here we send the API request and get the response
-            // Find out most dominant emotion
-            currentMood = getCurrMood(emotionScores); //this is where we send out scores to find out the predominant emotion
-            changeUI(); //time to update the web app, with their emotion!
+        getCatFacts(function (catFacts) { //here we send the API request and get the response
 
-            loadSong(currentMood); // Load random song based on mood
+
+
+            // Find out most dominant emotion
+            //currentMood = getCurrMood(emotionScores); //this is where we send out scores to find out the predominant emotion
+            changeCatUI(catFacts); //time to update the web app, with their emotion!
+
+            //loadSong(currentMood); // Load random song based on mood
             //Done!!
         });
-    });
+    //});
 });
 
 refreshbtn.addEventListener("click", function () {
@@ -31,7 +34,7 @@ refreshbtn.addEventListener("click", function () {
     loadSong(currentMood);
 });
 
-function processImage(callback) : void {
+/*function processImage(callback) : void {
     var file = imgSelector.files[0];  //get(0) is required as imgSelector is a jQuery object so to get the DOM object, its the first item in the object. files[0] refers to the location of the photo we just chose.
     var reader = new FileReader();
     if (file) {
@@ -48,15 +51,15 @@ function processImage(callback) : void {
             callback(file);
         }
     }
-}
+}*/
 
-function changeUI() : void {
-    //Show detected mood
-    pageheader.innerHTML = "Your mood is: " + currentMood.name;  //Remember currentMood is a Mood object, which has a name and emoji linked to it. 
+function changeCatUI(catFacts : any) : void {
     //Show mood emoji
-    var img : HTMLImageElement = <HTMLImageElement>  $("#selected-img")[0];//getting a predefined area on our webpage to show the emoji
-    img.src = currentMood.emoji; //link that area to the emoji of our currentMood.
-    img.style.display = "block"; //just some formating of the emoji's location
+    pageheader.innerHTML = "Your facts are:" + catFacts.all;
+
+    //var img : HTMLImageElement = <HTMLImageElement>  $("#selected-img")[0];//getting a predefined area on our webpage to show the emoji
+    //img.src = currentMood.emoji; //link that area to the emoji of our currentMood.
+    //img.style.display = "block"; //just some formating of the emoji's location
 
     //Display song refresh button
     refreshbtn.style.display = "inline";
@@ -68,25 +71,24 @@ function changeUI() : void {
 
 // Refer to http://stackoverflow.com/questions/35565732/implementing-microsofts-project-oxford-emotion-api-and-file-upload
 // and code snippet in emotion API documentation
-function sendEmotionRequest(file, callback) : void {
+function getCatFacts( callback) : void {
     $.ajax({
-        url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
-        beforeSend: function (xhrObj) {
+        url: "http://catfacts-api.appspot.com/api/facts?number=2",
+        //beforeSend: function (xhrObj) {
             // Request headers
-            xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
-            xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "d342c8d19d4e4aafbf64ed9f025aecc8");
-        },
-        type: "POST",
-        data: file,
+        //    xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
+        //    xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "d342c8d19d4e4aafbf64ed9f025aecc8");
+        //},
+        type: "GET",
+        //data: file,
         processData: false
     })
         .done(function (data) {
-            if (data.length != 0) { // if a face is detected
-                // Get the emotion scores
-                var scores = data[0].scores;
-                callback(scores);
+            if (data.length != 0) { // facts are found
+                var facts = data[0].facts;
+                callback(facts);
             } else {
-                pageheader.innerHTML = "Hmm, we can't detect a human face in that photo. Try another?";
+                pageheader.innerHTML = "We're having trouble finding your facts!";
             }
         })
         .fail(function (error) {
@@ -108,14 +110,14 @@ class Mood {
 }
 
 
-var happy : Mood = new Mood("happy", "http://emojipedia-us.s3.amazonaws.com/cache/a0/38/a038e6d3f342253c5ea3c057fe37b41f.png");
-var sad : Mood  = new Mood("sad", "https://cdn.shopify.com/s/files/1/1061/1924/files/Sad_Face_Emoji.png?9898922749706957214");
-var angry : Mood = new Mood("angry", "https://cdn.shopify.com/s/files/1/1061/1924/files/Very_Angry_Emoji.png?9898922749706957214");
-var neutral : Mood  = new Mood("neutral", "https://cdn.shopify.com/s/files/1/1061/1924/files/Neutral_Face_Emoji.png?9898922749706957214");
+//var happy : Mood = new Mood("happy", "http://emojipedia-us.s3.amazonaws.com/cache/a0/38/a038e6d3f342253c5ea3c057fe37b41f.png");
+//var sad : Mood  = new Mood("sad", "https://cdn.shopify.com/s/files/1/1061/1924/files/Sad_Face_Emoji.png?9898922749706957214");
+//var angry : Mood = new Mood("angry", "https://cdn.shopify.com/s/files/1/1061/1924/files/Very_Angry_Emoji.png?9898922749706957214");
+//var neutral : Mood  = new Mood("neutral", "https://cdn.shopify.com/s/files/1/1061/1924/files/Neutral_Face_Emoji.png?9898922749706957214");
 
 
 // any type as the scores values is from the project oxford api request (so we dont know the type)
-function getCurrMood(scores : any) : Mood {
+/*function getCurrMood(scores : any) : Mood {
     // In a practical sense, you would find the max emotion out of all the emotions provided. However we'll do the below just for simplicity's sake :P
     if (scores.happiness > 0.4) {
         currentMood = happy;
@@ -127,7 +129,7 @@ function getCurrMood(scores : any) : Mood {
         currentMood = neutral;
     }
     return currentMood;
-}
+}*/
 
 // Section of code that handles the music and soundcloud
 
