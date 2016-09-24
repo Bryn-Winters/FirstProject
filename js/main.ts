@@ -20,11 +20,11 @@ factSelector.addEventListener("change", function () { // file has been picked
 
             // Find out most dominant emotion
             //currentMood = getCurrMood(emotionScores); //this is where we send out scores to find out the predominant emotion
-            changeCatUI(catFacts); //time to update the web app, with their emotion!
+            //changeCatUI(infacts); //time to update the web app, with their emotion!
 
             //loadSong(currentMood); // Load random song based on mood
             //Done!!
-        });
+        //});
     //});
 });
 
@@ -71,12 +71,37 @@ function changeCatUI(catFacts) : void {
 // Refer to http://stackoverflow.com/questions/35565732/implementing-microsofts-project-oxford-emotion-api-and-file-upload
 // and code snippet in emotion API documentation
 function getCatFacts( callback) : void {
-     $.ajax({
+    /* $.ajax({
         type: "GET",
         url: "http://catfacts-api.appspot.com/api/facts&number=2",
         processData: false
     })
-        .done(function (data) {
+
+var infacts;
+            $.getJSON(
+        "http://catfacts-api.appspot.com/api/facts&number=2",
+        //url: url,
+        //number: 2,
+        //dataType : "json",
+        //type : "GET",
+        //data: file,
+        function(facts, success){
+            //if (result.length != 0) { // facts are found
+                infacts = facts.all;
+                //callback(infacts);
+            //}
+
+        }
+    );*/
+
+
+$.getJSON('http://en.wikipedia.org/w/api.php?action=parse&page=cat&prop=text&format=json&callback=?', function(json) {
+    $('#catInfo').html(json.parse.text.[*]);
+    $("#catInfo").find("a:not(.references a)").attr("href", function(){ return "http://www.wikipedia.org" + $(this).attr("href");});
+    $("#catInfo").find("a").attr("target", "_blank");
+  });
+
+        /*.done(function (data) {
             if (data.length != 0) { // facts are found
                 var facts = data[0].facts;
                 callback(facts);
@@ -87,7 +112,7 @@ function getCatFacts( callback) : void {
         .fail(function (error) {
             pageheader.innerHTML = "Sorry, something went wrong. :( Try again in a bit?";
             console.log(error.getAllResponseHeaders());
-        });
+        });*/
 }
 
 // Section of code that handles the mood
