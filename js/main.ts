@@ -7,11 +7,11 @@ var pageheader = $("#page-header")[0]; //note the [0], jQuery returns an object,
 var pagecontainer = $("#page-container")[0]; 
 
 // The html DOM object has been casted to a input element (as defined in index.html) as later we want to get specific fields that are only avaliable from an input element object
-var imgSelector : HTMLInputElement = <HTMLInputElement> $("#my-file-selector")[0]; 
+var factSelector : HTMLInputElement = <HTMLInputElement> $("#my-file-selector")[0]; 
 var refreshbtn = $("#refreshbtn")[0]; //You dont have to use [0], however this just means whenever you use the object you need to refer to it with [0].
 
 // Register button listeners
-imgSelector.addEventListener("change", function () { // file has been picked
+factSelector.addEventListener("change", function () { // file has been picked
     pageheader.innerHTML = "Loading Cat facts...";
     //processImage(function (file) { //this checks the extension and file
         // Get emotions based on image
@@ -31,7 +31,7 @@ imgSelector.addEventListener("change", function () { // file has been picked
 
 refreshbtn.addEventListener("click", function () {
     // Load random song based on mood
-    loadSong(currentMood);
+    //loadSong(currentMood);
 });
 
 /*function processImage(callback) : void {
