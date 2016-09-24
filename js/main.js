@@ -10,26 +10,13 @@ factSelector.addEventListener("change", function () {
     pageheader.innerHTML = "Loading Cat facts...";
     //processImage(function (file) { //this checks the extension and file
     // Get emotions based on image
-    //getCatFacts(function (catFacts) { //here we send the API request and get the response
-    var infacts;
-    $.get("http://catfacts-api.appspot.com/api/facts&number=2", 
-    //url: url,
-    //number: 2,
-    //dataType : "json",
-    //type : "GET",
-    //data: file,
-    function (facts, success) {
-        //if (result.length != 0) { // facts are found
-        infacts = facts.all;
-        //callback(infacts);
-        //}
+    getCatFacts(function (catFacts) {
+        // Find out most dominant emotion
+        //currentMood = getCurrMood(emotionScores); //this is where we send out scores to find out the predominant emotion
+        changeCatUI(catFacts); //time to update the web app, with their emotion!
+        //loadSong(currentMood); // Load random song based on mood
+        //Done!!
     });
-    // Find out most dominant emotion
-    //currentMood = getCurrMood(emotionScores); //this is where we send out scores to find out the predominant emotion
-    changeCatUI(infacts); //time to update the web app, with their emotion!
-    //loadSong(currentMood); // Load random song based on mood
-    //Done!!
-    //});
     //});
 });
 refreshbtn.addEventListener("click", function () {
@@ -56,7 +43,7 @@ refreshbtn.addEventListener("click", function () {
 }*/
 function changeCatUI(catFacts) {
     //Show mood emoji
-    pageheader.innerHTML = "Your facts are:" + catFacts.all;
+    pageheader.innerHTML = "Your facts are:" + catFacts;
     //var img : HTMLImageElement = <HTMLImageElement>  $("#selected-img")[0];//getting a predefined area on our webpage to show the emoji
     //img.src = currentMood.emoji; //link that area to the emoji of our currentMood.
     //img.style.display = "block"; //just some formating of the emoji's location
@@ -68,41 +55,24 @@ function changeCatUI(catFacts) {
 // Refer to http://stackoverflow.com/questions/35565732/implementing-microsofts-project-oxford-emotion-api-and-file-upload
 // and code snippet in emotion API documentation
 function getCatFacts(callback) {
-    /*$.get(
-         "http://catfacts-api.appspot.com/api/facts?number=2",
-        function(data)
-        {
-            $("body")
-            .append("Facts: " + data.facts );
-        //url: url,
-        //type: "GET",
-        //data: file,
-        //processData: false
-    }, "json")*/
-    $.get("http://catfacts-api.appspot.com/api/facts&number=2", 
-    //url: url,
-    //number: 2,
-    //dataType : "json",
-    //type : "GET",
-    //data: file,
-    function (facts, success) {
-        //if (result.length != 0) { // facts are found
-        var infacts = facts.all;
-        callback(infacts);
-        //}
-    });
-    /*.done(function (data) {
-        if (data.length != 0) { // facts are found
+    $.ajax({
+        type: "GET",
+        url: "http://catfacts-api.appspot.com/api/facts&number=2",
+        processData: false
+    })
+        .done(function (data) {
+        if (data.length != 0) {
             var facts = data[0].facts;
             callback(facts);
-        } else {
+        }
+        else {
             pageheader.innerHTML = "We're having trouble finding your facts!";
         }
     })
-    .fail(function (error) {
+        .fail(function (error) {
         pageheader.innerHTML = "Sorry, something went wrong. :( Try again in a bit?";
         console.log(error.getAllResponseHeaders());
-    });*/
+    });
 }
 // Section of code that handles the mood
 //A Mood class which has the mood as a string and its corresponding emoji

@@ -15,31 +15,16 @@ factSelector.addEventListener("change", function () { // file has been picked
     pageheader.innerHTML = "Loading Cat facts...";
     //processImage(function (file) { //this checks the extension and file
         // Get emotions based on image
-        //getCatFacts(function (catFacts) { //here we send the API request and get the response
-var infacts;
-            $.get(
-        "http://catfacts-api.appspot.com/api/facts&number=2",
-        //url: url,
-        //number: 2,
-        //dataType : "json",
-        //type : "GET",
-        //data: file,
-        function(facts, success){
-            //if (result.length != 0) { // facts are found
-                infacts = facts.all;
-                //callback(infacts);
-            //}
+        getCatFacts(function (catFacts) { //here we send the API request and get the response
 
-        }
-    );
 
             // Find out most dominant emotion
             //currentMood = getCurrMood(emotionScores); //this is where we send out scores to find out the predominant emotion
-            changeCatUI(infacts); //time to update the web app, with their emotion!
+            changeCatUI(catFacts); //time to update the web app, with their emotion!
 
             //loadSong(currentMood); // Load random song based on mood
             //Done!!
-        //});
+        });
     //});
 });
 
@@ -67,9 +52,9 @@ refreshbtn.addEventListener("click", function () {
     }
 }*/
 
-function changeCatUI(catFacts : any) : void {
+function changeCatUI(catFacts) : void {
     //Show mood emoji
-    pageheader.innerHTML = "Your facts are:" + catFacts.all;
+    pageheader.innerHTML = "Your facts are:" + catFacts;
 
     //var img : HTMLImageElement = <HTMLImageElement>  $("#selected-img")[0];//getting a predefined area on our webpage to show the emoji
     //img.src = currentMood.emoji; //link that area to the emoji of our currentMood.
@@ -86,34 +71,12 @@ function changeCatUI(catFacts : any) : void {
 // Refer to http://stackoverflow.com/questions/35565732/implementing-microsofts-project-oxford-emotion-api-and-file-upload
 // and code snippet in emotion API documentation
 function getCatFacts( callback) : void {
-    /*$.get(
-         "http://catfacts-api.appspot.com/api/facts?number=2",
-        function(data)
-        {
-            $("body")
-            .append("Facts: " + data.facts );
-        //url: url,
-        //type: "GET",
-        //data: file,
-        //processData: false
-    }, "json")*/
-    
-    $.get(
-        "http://catfacts-api.appspot.com/api/facts&number=2",
-        //url: url,
-        //number: 2,
-        //dataType : "json",
-        //type : "GET",
-        //data: file,
-        function(facts, success){
-            //if (result.length != 0) { // facts are found
-                var infacts = facts.all;
-                callback(infacts);
-            //}
-
-        }
-    );
-        /*.done(function (data) {
+     $.ajax({
+        type: "GET",
+        url: "http://catfacts-api.appspot.com/api/facts&number=2",
+        processData: false
+    })
+        .done(function (data) {
             if (data.length != 0) { // facts are found
                 var facts = data[0].facts;
                 callback(facts);
@@ -124,7 +87,7 @@ function getCatFacts( callback) : void {
         .fail(function (error) {
             pageheader.innerHTML = "Sorry, something went wrong. :( Try again in a bit?";
             console.log(error.getAllResponseHeaders());
-        });*/
+        });
 }
 
 // Section of code that handles the mood
