@@ -15,6 +15,7 @@ factSelector.addEventListener("change", function () {
     // Find out most dominant emotion
     //currentMood = getCurrMood(emotionScores); //this is where we send out scores to find out the predominant emotion
     //changeCatUI(infacts); //time to update the web app, with their emotion!
+    pageheader.innerHTML = "Scroll Down!";
     //loadSong(currentMood); // Load random song based on mood
     //Done!!
     //});
