@@ -28,7 +28,7 @@
                 
 
 
-                    <button type="button" class="btn btn-info" href="http://jquery.com/">Try clicking this!</button>
+                    <a href="http://jquery.com/">Try clicking this!</a>
                     <script src="./node_modules/jquery/dist/jquery.js"></script>
                     <script>
 $( document ).ready(function() {
@@ -51,6 +51,18 @@ $( "a" ).click(function( event ) {
 });
 
                 </script>
+
+<div id="flip">Click to see a slide down panel!</div>
+<div id="panel">Sup bro! Thanks for clicking!</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("#flip").click(function(){
+        $("#panel").slideDown("slow");
+    });
+});
+</script>
+ 
 
 
 
