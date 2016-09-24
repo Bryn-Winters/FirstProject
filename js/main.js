@@ -6,7 +6,7 @@ var pagecontainer = $("#page-container")[0];
 var factSelector = $("#my-file-selector")[0];
 var refreshbtn = $("#refreshbtn")[0]; //You dont have to use [0], however this just means whenever you use the object you need to refer to it with [0].
 // Register button listeners
-factSelector.addEventListener("change", function () {
+factSelector.addEventListener("click", function () {
     pageheader.innerHTML = "Loading Cat facts...";
     //processImage(function (file) { //this checks the extension and file
     // Get emotions based on image

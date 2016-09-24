@@ -11,7 +11,7 @@ var factSelector : HTMLInputElement = <HTMLInputElement> $("#my-file-selector")[
 var refreshbtn = $("#refreshbtn")[0]; //You dont have to use [0], however this just means whenever you use the object you need to refer to it with [0].
 
 // Register button listeners
-factSelector.addEventListener("change", function () { // file has been picked
+factSelector.addEventListener("click", function () { // file has been picked
     pageheader.innerHTML = "Loading Cat facts...";
     //processImage(function (file) { //this checks the extension and file
         // Get emotions based on image
