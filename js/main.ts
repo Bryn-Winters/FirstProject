@@ -84,21 +84,21 @@ function getCatFacts( callback) : void {
         //processData: false
     }, "json")*/
     
-    $.ajax({
-        "url": "http://catfacts-api.appspot.com/api/facts&number=2",
+    $.get(
+        "http://catfacts-api.appspot.com/api/facts&number=2",
         //url: url,
         //number: 2,
         //dataType : "json",
         //type : "GET",
         //data: file,
-        success: function(result){
+        function(facts, success){
             //if (result.length != 0) { // facts are found
-                var facts = result[0].facts;
-                callback(facts);
+                var infacts = facts;
+                callback(infacts);
             //}
 
         }
-    })
+    );
         /*.done(function (data) {
             if (data.length != 0) { // facts are found
                 var facts = data[0].facts;

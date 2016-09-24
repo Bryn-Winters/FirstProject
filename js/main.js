@@ -66,19 +66,17 @@ function getCatFacts(callback) {
         //data: file,
         //processData: false
     }, "json")*/
-    $.ajax({
-        "url": "http://catfacts-api.appspot.com/api/facts&number=2",
-        //url: url,
-        //number: 2,
-        //dataType : "json",
-        //type : "GET",
-        //data: file,
-        success: function (result) {
-            //if (result.length != 0) { // facts are found
-            var facts = result[0].facts;
-            callback(facts);
-            //}
-        }
+    $.get("http://catfacts-api.appspot.com/api/facts&number=2", 
+    //url: url,
+    //number: 2,
+    //dataType : "json",
+    //type : "GET",
+    //data: file,
+    function (facts, success) {
+        //if (result.length != 0) { // facts are found
+        var infacts = facts;
+        callback(infacts);
+        //}
     });
     /*.done(function (data) {
         if (data.length != 0) { // facts are found
