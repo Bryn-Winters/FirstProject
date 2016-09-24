@@ -15,8 +15,8 @@ factSelector.addEventListener("change", function () { // file has been picked
     pageheader.innerHTML = "Loading Cat facts...";
     //processImage(function (file) { //this checks the extension and file
         // Get emotions based on image
-        getCatFacts(function (catFacts) { //here we send the API request and get the response
-
+        //getCatFacts(function () { //here we send the API request and get the response
+            getCatFacts();
 
             // Find out most dominant emotion
             //currentMood = getCurrMood(emotionScores); //this is where we send out scores to find out the predominant emotion
@@ -70,7 +70,7 @@ function changeCatUI(catFacts) : void {
 
 // Refer to http://stackoverflow.com/questions/35565732/implementing-microsofts-project-oxford-emotion-api-and-file-upload
 // and code snippet in emotion API documentation
-function getCatFacts( callback) : void {
+function getCatFacts() : void {
     /* $.ajax({
         type: "GET",
         url: "http://catfacts-api.appspot.com/api/facts&number=2",
