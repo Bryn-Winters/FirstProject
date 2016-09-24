@@ -70,14 +70,14 @@ function getCatFacts(callback) {
         "url": "http://catfacts-api.appspot.com/api/facts&number=2",
         //url: url,
         //number: 2,
-        dataType: "json",
-        type: "GET",
+        //dataType : "json",
+        //type : "GET",
         //data: file,
         success: function (result) {
-            if (result.length != 0) {
-                var facts = result[0].facts;
-                callback(facts);
-            }
+            //if (result.length != 0) { // facts are found
+            var facts = result[0].facts;
+            callback(facts);
+            //}
         }
     });
     /*.done(function (data) {
