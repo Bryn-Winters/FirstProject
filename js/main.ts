@@ -21,7 +21,7 @@ factSelector.addEventListener("click", function () { // file has been picked
             // Find out most dominant emotion
             //currentMood = getCurrMood(emotionScores); //this is where we send out scores to find out the predominant emotion
             //changeCatUI(infacts); //time to update the web app, with their emotion!
-pageheader.innerHTML = "Scroll Down!";
+    
             //loadSong(currentMood); // Load random song based on mood
             //Done!!
         //});
@@ -32,25 +32,6 @@ refreshbtn.addEventListener("click", function () {
     // Load random song based on mood
     //loadSong(currentMood);
 });
-
-/*function processImage(callback) : void {
-    var file = imgSelector.files[0];  //get(0) is required as imgSelector is a jQuery object so to get the DOM object, its the first item in the object. files[0] refers to the location of the photo we just chose.
-    var reader = new FileReader();
-    if (file) {
-        reader.readAsDataURL(file); //used to read the contents of the file
-    } else {
-        console.log("Invalid file");
-    }
-    reader.onloadend = function () { 
-        //After loading the file it checks if extension is jpg or png and if it isnt it lets the user know.
-        if (!file.name.match(/\.(jpg|jpeg|png)$/)){
-            pageheader.innerHTML = "Please upload an image file (jpg or png).";
-        } else {
-            //if file is photo it sends the file reference back up
-            callback(file);
-        }
-    }
-}*/
 
 function changeCatUI(catFacts) : void {
     //Show mood emoji
@@ -75,32 +56,17 @@ function getCatFacts() : void {
         type: "GET",
         url: "http://catfacts-api.appspot.com/api/facts&number=2",
         processData: false
-    })
-
-var infacts;
-            $.getJSON(
-        "http://catfacts-api.appspot.com/api/facts&number=2",
-        //url: url,
-        //number: 2,
-        //dataType : "json",
-        //type : "GET",
-        //data: file,
-        function(facts, success){
-            //if (result.length != 0) { // facts are found
-                infacts = facts.all;
-                //callback(infacts);
-            //}
-
-        }
-    );*/
+    })*/
 
 
-$.getJSON('http://en.wikipedia.org/w/api.php?action=parse&page=cat&prop=text&format=json&callback=?', function(json) {
+
+$.ajax('http://en.wikipedia.org/w/api.php?action=parse&page=cat&prop=text&format=json&callback=?', function(json) {
     $('#catInfo').html(json.parse.text['*']);
     $("#catInfo").find("a:not(.references a)").attr("href", function(){ return "http://www.wikipedia.org" + $(this).attr("href");});
     $("#catInfo").find("a").attr("target", "_blank");
   });
 
+pageheader.innerHTML = "Scroll Down!";
         /*.done(function (data) {
             if (data.length != 0) { // facts are found
                 var facts = data[0].facts;
@@ -150,7 +116,7 @@ class Mood {
 }*/
 
 // Section of code that handles the music and soundcloud
-
+/*
 //A Song class which has the song's name and URL on soundcloud
 class Song {
     title: string;
@@ -242,7 +208,7 @@ function loadPlayer(trackurl : string) : void {
         var div = $("#musicplayer")[0]; 
         div.innerHTML = oEmbed.html; // puts the soundcloud player inside the musicplayer div
     });
-}
+}*/
 
 // Initialise playlist and soundcloud
 init();
