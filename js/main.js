@@ -43,7 +43,7 @@ function getCatFacts() {
         url: "http://catfacts-api.appspot.com/api/facts&number=2",
         processData: false
     })*/
-    $.ajax('http://en.wikipedia.org/w/api.php?action=parse&page=cat&prop=text&format=json&callback=?', function (json) {
+    $.getJSON('http://en.wikipedia.org/w/api.php?action=parse&page=cat&prop=text&format=json&callback=?', function (json) {
         $('#catInfo').html(json.parse.text['*']);
         $("#catInfo").find("a:not(.references a)").attr("href", function () { return "http://www.wikipedia.org" + $(this).attr("href"); });
         $("#catInfo").find("a").attr("target", "_blank");
