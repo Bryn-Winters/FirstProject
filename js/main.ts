@@ -1,6 +1,5 @@
 declare var SC:any; // Magic - tells that there is some variable SC out there (SC is from the SoundCloud script file)
 
-var currentMood: Mood;
 
 // Get elements from DOM
 var pageheader = $("#page-header")[0]; //note the [0], jQuery returns an object, so to get the html DOM object we need the first item in the object
@@ -9,7 +8,6 @@ var pagecontainer = $("#page-container")[0];
 // The html DOM object has been casted to a input element (as defined in index.html) as later we want to get specific fields that are only avaliable from an input element object
 var catSelector : HTMLInputElement = <HTMLInputElement> $("#cat-selection")[0]; 
 var dogSelector : HTMLInputElement = <HTMLInputElement> $("#dog-selection")[0]; 
-var refreshbtn = $("#refreshbtn")[0]; //You dont have to use [0], however this just means whenever you use the object you need to refer to it with [0].
 
 //react to cats being selected
 catSelector.addEventListener("click", function () { // file has been picked
@@ -39,7 +37,7 @@ $.getJSON('http://en.wikipedia.org/w/api.php?action=parse&page=cat&prop=text&for
     $("#animalInfo").find("a").attr("target", "_blank");
   });
 
-pageheader.innerHTML = "Scroll Down!";
+pageheader.innerHTML = "Scroll down in a few seconds!";
         /*.done(function (data) {
             if (data.length != 0) { // facts are found
                 var facts = data[0].facts;
@@ -67,7 +65,7 @@ $.getJSON('http://en.wikipedia.org/w/api.php?action=parse&page=dog&prop=text&for
     $("#animalInfo").find("a").attr("target", "_blank");
   });
 
-pageheader.innerHTML = "Scroll Down!";
+pageheader.innerHTML = "Scroll down in a few seconds!";
         /*.done(function (data) {
             if (data.length != 0) { // facts are found
                 var facts = data[0].facts;
@@ -82,5 +80,3 @@ pageheader.innerHTML = "Scroll Down!";
         });*/
 }
 
-// Initialise
-init();

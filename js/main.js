@@ -1,11 +1,9 @@
-var currentMood;
 // Get elements from DOM
 var pageheader = $("#page-header")[0]; //note the [0], jQuery returns an object, so to get the html DOM object we need the first item in the object
 var pagecontainer = $("#page-container")[0];
 // The html DOM object has been casted to a input element (as defined in index.html) as later we want to get specific fields that are only avaliable from an input element object
 var catSelector = $("#cat-selection")[0];
 var dogSelector = $("#dog-selection")[0];
-var refreshbtn = $("#refreshbtn")[0]; //You dont have to use [0], however this just means whenever you use the object you need to refer to it with [0].
 //react to cats being selected
 catSelector.addEventListener("click", function () {
     pageheader.innerHTML = "Loading Cat facts...";
@@ -29,7 +27,7 @@ function getCatFacts() {
         $("#animalInfo").find("a:not(.references a)").attr("href", function () { return "http://www.wikipedia.org" + $(this).attr("href"); });
         $("#animalInfo").find("a").attr("target", "_blank");
     });
-    pageheader.innerHTML = "Scroll Down!";
+    pageheader.innerHTML = "Scroll down in a few seconds!";
     /*.done(function (data) {
         if (data.length != 0) { // facts are found
             var facts = data[0].facts;
@@ -54,7 +52,7 @@ function getDogFacts() {
         $("#animalInfo").find("a:not(.references a)").attr("href", function () { return "http://www.wikipedia.org" + $(this).attr("href"); });
         $("#animalInfo").find("a").attr("target", "_blank");
     });
-    pageheader.innerHTML = "Scroll Down!";
+    pageheader.innerHTML = "Scroll down in a few seconds!";
     /*.done(function (data) {
         if (data.length != 0) { // facts are found
             var facts = data[0].facts;
@@ -68,5 +66,3 @@ function getDogFacts() {
         console.log(error.getAllResponseHeaders());
     });*/
 }
-// Initialise
-init();
