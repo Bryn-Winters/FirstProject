@@ -14,7 +14,7 @@
             </h1>
 
             <h2 id="page-header">
-                Get information about cats from wikipedia!
+                Get information about animals from wikipedia!
             </h2>
             <img id="selected-img" src="">
             <h4 id="track-name"></h4>
@@ -24,18 +24,18 @@
                     Get cat facts now!
                 </label-->
 
-                <button type="button" class="btn btn-info" id="my-file-selector">Get cat facts now!</button>
-                <button type="button" class="btn btn-info" id="refreshbtn">More facts please</button>
+                <button type="button" class="btn btn-info" id="cat-selection">Get cat facts now!</button>
+                
 
 
-                    <a href="http://jquery.com/">Try clicking this!</a>
+                    <button href="http://jquery.com/">Try clicking this!</button>
                     <script src="./node_modules/jquery/dist/jquery.js"></script>
                     <script>
 $( document ).ready(function() {
  
     $( "a" ).click(function( event ) {
  
-        alert( "Look, a window popped up using jquery! That link you used to open this will dissappear forever when you close this window" );
+        alert( "Look, a window popped up using jquery! That link you used to open this will disappear forever when you close this window" );
  
         event.preventDefault();
  
@@ -55,7 +55,9 @@ $( "a" ).click(function( event ) {
 
 
             </div>
-            <div id="catInfo">
+            <button type="button" class="btn btn-info" id="dog-selection">Get dog facts now!</button>
+
+            <div id="animalInfo">
             </div>
         </div>
         <!-- 
